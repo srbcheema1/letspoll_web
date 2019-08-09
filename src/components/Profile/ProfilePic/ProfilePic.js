@@ -4,7 +4,6 @@ import './ProfilePic.css';
 
 class ProfilePic extends Component {
   render() {
-    console.log(this.props);
     return (
       <div className="profile">
           <img className="profile-image" src={this.props.src} alt="dp"/>
