@@ -1,5 +1,5 @@
 import { server_url } from './constants.js';
-// import decode from 'jwt-decode';
+import decode from 'jwt-decode';
 import api_fetch from './auth';
 
 var login = (username, password, poll_id) => {
@@ -17,7 +17,6 @@ var login = (username, password, poll_id) => {
   }).then(
     success => {
         if(success['token']){
-          // const decoded = decode(success['token']);
           localStorage.setItem('userid_token', success['token']);// changable
           console.log('logged in');
         } else {
@@ -29,4 +28,32 @@ var login = (username, password, poll_id) => {
   )
 }
 
+var isTokenExpired = (token) => {
+  try {
+      const decoded = decode(token);
+      if (decoded.exp < Date.now() / 1000) { // Checking if token is expired.
+          return true;
+      } else {
+        return false;
+      }
+  } catch (err) {
+      return false;
+  }
+}
+
+var logout = () => {
+  localStorage.removeItem('userid_token');
+}
+
+var loggedIn = () => {
+  const token = localStorage.getItem('userid_token');
+  return !!token && !isTokenExpired(token) // handwaiving here
+}
+
+
+export {
+  logout,
+  loggedIn,
+  isTokenExpired
+}
 export default login;

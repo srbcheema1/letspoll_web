@@ -1,10 +1,14 @@
+import {loggedIn} from './login';
+
 export var auth_fetch = (url,args) => {
     const headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     }
 
-    // headers['auth_key'] = 'our api key'
+    if (loggedIn()) {
+        headers['AUTH-TOKEN'] = 'Bearer ' + localStorage.getItem('userid_token')
+    }
 
     return fetch(url, {
         headers,

@@ -13,6 +13,7 @@ class App extends Component {
       <Router>
         <Navbar/>
         <div>
+          {/* exact means only this not go further, other way is usign switch */}
           <Route exact path = "/" component = {Home}/>
           <Route exact path = "/About" component = {About}/>
         </div>
