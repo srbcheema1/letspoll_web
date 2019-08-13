@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-import { server_url } from '../../extra/constants';
-import api_fetch from '../../extra/auth';
+import { server_url } from '../../util/constants';
+import api_fetch from '../../util/auth';
 import './footer.css'
 
 class Footer extends Component{

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {HashRouter as Router, Route} from 'react-router-dom';
 
-import Home from './pages/Home.js'
-import About from './pages/About.js'
+import Home from './containers/Home/Home'
+import About from './containers/About/About'
 
-import Navbar from './components/navbar/Navbar.js'
-import Footer from './components/footer/footer.js'
+import Navbar from './components/navbar/Navbar'
+import Footer from './components/footer/footer'
 
 class App extends Component {
   render() {

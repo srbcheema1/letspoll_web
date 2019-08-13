@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
 
-import Profile from '../components/Profile/Profile.js';
+import Profile from '../../components/Profile/Profile.js';
 
-import srb_dp from '../extra/images/srb.jpeg';
-import nimit_dp from '../extra/images/nimit.jpeg';
-import vishi_dp from '../extra/images/vishi.jpeg';
-import sahoo_dp from '../extra/images/sahoo.jpeg';
-import gourav_dp from '../extra/images/gourav.jpg';
+import srb_dp from '../../util/images/srb.jpeg';
+import nimit_dp from '../../util/images/nimit.jpeg';
+import vishi_dp from '../../util/images/vishi.jpeg';
+import sahoo_dp from '../../util/images/sahoo.jpeg';
+import gourav_dp from '../../util/images/gourav.jpg';
 
-import email_logo from '../extra/images/email.svg';
-import github_logo from '../extra/images/github.svg';
-import facebook_logo from '../extra/images/facebook.svg';
-import linkedin_logo from '../extra/images/linkedin.svg';
+import email_logo from '../../util/images/email.svg';
+import github_logo from '../../util/images/github.svg';
+import facebook_logo from '../../util/images/facebook.svg';
+import linkedin_logo from '../../util/images/linkedin.svg';
 
-import './styles/About.css'
+import './About.css'
 
 class About extends Component{
   render(){

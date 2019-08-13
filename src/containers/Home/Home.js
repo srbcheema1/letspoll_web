@@ -1,11 +1,12 @@
 import React,{Component} from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Image, Modal, Button } from 'react-bootstrap';
-import { server_url } from '../extra/constants.js';
-import api_fetch from '../extra/auth';
-import login from '../extra/login';
 
-import app_logo from '../extra/images/letspoll.png';
+import { server_url } from '../../util/constants';
+import api_fetch from '../../util/auth';
+import login from '../../util/login';
+
+import app_logo from '../../util/images/letspoll.png';
 
 class Home extends Component{
   constructor(props) {
