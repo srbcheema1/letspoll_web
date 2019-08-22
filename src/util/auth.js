@@ -1,4 +1,4 @@
-import {loggedIn} from './login';
+import {get_decoded_token, get_token} from './login';
 
 export var auth_fetch = (url,args) => {
     const headers = {
@@ -6,8 +6,8 @@ export var auth_fetch = (url,args) => {
         'Content-Type': 'application/json'
     }
 
-    if (loggedIn()) {
-        headers['AUTH-TOKEN'] = 'Bearer ' + localStorage.getItem('userid_token')
+    if (get_decoded_token()) {
+        headers['AUTH-TOKEN'] = 'Bearer ' + get_token()
     }
 
     return fetch(url, {

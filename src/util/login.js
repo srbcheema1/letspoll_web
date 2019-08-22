@@ -1,6 +1,7 @@
-import { server_url } from './constants.js';
 import decode from 'jwt-decode';
+
 import api_fetch from './auth';
+import { server_url, user_token } from './constants';
 
 var login = (username, password, poll_id) => {
   var url = `${server_url}/auth/login/`;
@@ -11,17 +12,17 @@ var login = (username, password, poll_id) => {
   }
   data = JSON.stringify(data);
   
-  api_fetch(url, { // Your POST endpoint
+  return api_fetch(url, { // Your POST endpoint
     method: 'POST',
     body:data
   }).then(
     success => {
         if(success['token']){
-          localStorage.setItem('userid_token', success['token']);// changable
           console.log('logged in');
         } else {
           console.log('unable to log in');
         }
+        return success;
     }
   ).catch(
     error => console.log(error) // Handle the error response object
@@ -30,30 +31,36 @@ var login = (username, password, poll_id) => {
 
 var isTokenExpired = (token) => {
   try {
-      const decoded = decode(token);
-      if (decoded.exp < Date.now() / 1000) { // Checking if token is expired.
-          return true;
+      if (token.exp < Date.now() / 1000) { // Checking if token is expired.
+        return true;
       } else {
         return false;
       }
   } catch (err) {
-      return false;
+      return true;
   }
 }
 
-var logout = () => {
-  localStorage.removeItem('userid_token');
+var get_token = () => {
+  return localStorage.getItem(user_token);
 }
 
-var loggedIn = () => {
-  const token = localStorage.getItem('userid_token');
-  return !!token && !isTokenExpired(token) // handwaiving here
+// can also be used to check if user is logged in or not
+var get_decoded_token = () => {
+  try{
+    const decoded = decode(get_token());
+    if(isTokenExpired(decoded)) {
+      return null;
+    }
+    return decoded;
+  } catch {
+    console.log('bad token');
+  }
 }
-
 
 export {
-  logout,
-  loggedIn,
-  isTokenExpired
+  get_token,
+  get_decoded_token,
+  login,
 }
 export default login;

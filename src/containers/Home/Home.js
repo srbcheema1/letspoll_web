@@ -1,11 +1,11 @@
 import React,{Component} from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Image, Modal, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 import { server_url } from '../../util/constants';
 import api_fetch from '../../util/auth';
-import login from '../../util/login';
-
+import { loginUser } from '../../store/actions/user_actions';
 import app_logo from '../../util/images/letspoll.png';
 
 class Home extends Component{
@@ -45,7 +45,7 @@ class Home extends Component{
       success => {
         let username = document.getElementById("username_input").value;
         let userpass = document.getElementById("userpass_input").value;
-        login(username, userpass, pollid)
+        this.props.loginUser(username, userpass, pollid);
       }
     ).catch(
       error => console.log(error) // Handle the error response object
@@ -283,4 +283,8 @@ class Home extends Component{
   }
 }
 
-export default Home;
+const mapDispatchToProps = dispatch => ({
+  loginUser: (username,userpass,pollid) => dispatch(loginUser(username,userpass,pollid))
+})
+
+export default connect(null, mapDispatchToProps)(Home)
